@@ -5,7 +5,7 @@
 # GHub — Hub Utilities Plugin for Minecraft
 
 **Version:** 1.0
-**Compatible with:** Paper 1.21.8+
+**Compatible with:** Paper 1.21.x
 **Dependencies:** PlaceholderAPI (optional)
 
 GHub is a minimalist yet powerful plugin for managing spawn points, hub items, and player teleportation on a Minecraft server. It allows you to easily set up spawn, give special items, and supports placeholders via PlaceholderAPI.
