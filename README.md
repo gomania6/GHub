@@ -142,7 +142,3 @@ messages:
 3. Restart the server to generate `config.yml` and `spawn.yml`.
 4. Configure `config.yml` and set the spawn point using `/ghub spawn`.
 5. Done! Players will now receive the hub item on join.
-
----
-
-If you want, I can also polish it to be **even more Modrinth/GitHub friendly** with badges, headings, and concise examples. Do you want me to do that?
