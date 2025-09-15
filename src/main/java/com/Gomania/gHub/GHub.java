@@ -25,6 +25,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.plugin.messaging.PluginMessageListener;
+import org.bukkit.GameMode;
 
 import com.google.common.io.ByteArrayDataInput;
 import com.google.common.io.ByteArrayDataOutput;
@@ -146,23 +147,19 @@ public class GHub extends JavaPlugin implements Listener, PluginMessageListener 
 
         String command = function;
 
-        // Заменяем плейсхолдеры только если есть игрок
         if (player != null) {
             command = processPlaceholders(player, command);
         } else {
-            // Если команды из консоли и есть %player_name%, выводим предупреждение
             if (command.contains("%player_name%")) {
                 sender.sendMessage(ChatColor.RED + "Ошибка: %player_name% не может быть использован из консоли без игрока!");
                 return;
             }
         }
 
-        // Консольный командный блок
         if (command.startsWith("[console]")) {
             command = command.replace("[console]", "").trim();
             Bukkit.dispatchCommand(Bukkit.getConsoleSender(), command);
         }
-        // BungeeCord телепорт
         else if (command.startsWith("[bungee]") && player != null) {
             String server = command.replace("[bungee]", "").trim();
             ByteArrayDataOutput out = ByteStreams.newDataOutput();
@@ -171,7 +168,6 @@ public class GHub extends JavaPlugin implements Listener, PluginMessageListener 
             player.sendPluginMessage(this, "BungeeCord", out.toByteArray());
         }
     }
-
 
     private String processPlaceholders(Player player, String text) {
         if (player != null) text = text.replace("%player_name%", player.getName());
@@ -186,7 +182,6 @@ public class GHub extends JavaPlugin implements Listener, PluginMessageListener 
         return ChatColor.translateAlternateColorCodes('&', text);
     }
 
-    // Исправленный метод getMessage
     private String getMessage(String path, Player player) {
         String msg = config.getString("messages." + path, "&cMessage not found: " + path);
         return processPlaceholders(player, msg);
@@ -203,15 +198,29 @@ public class GHub extends JavaPlugin implements Listener, PluginMessageListener 
         saveSpawnConfig();
     }
 
+    private void applyDefaultGamemode(Player player) {
+        if (config.getBoolean("gamemode.enabled", false)) {
+            String gmName = config.getString("gamemode.default", "ADVENTURE").toUpperCase();
+            try {
+                player.setGameMode(GameMode.valueOf(gmName));
+            } catch (IllegalArgumentException e) {
+                getLogger().warning("Неверный режим игры в config.yml: " + gmName);
+            }
+        }
+    }
+
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent e) {
         Player p = e.getPlayer();
+
         if (spawnLocation != null) {
             p.teleport(spawnLocation);
             if (config.getBoolean("messages.welcome-spawn-enabled", true))
                 p.sendMessage(getMessage("welcome-spawn", p));
         }
+
         giveSpecialItem(p);
+        applyDefaultGamemode(p);
     }
 
     @EventHandler
@@ -249,7 +258,7 @@ public class GHub extends JavaPlugin implements Listener, PluginMessageListener 
     @EventHandler
     public void onPlayerInteract(PlayerInteractEvent e) {
         if (e.getItem() != null && isSpecialItem(e.getItem())) {
-            executeFunction(e.getPlayer(), e.getPlayer()); // sender = player
+            executeFunction(e.getPlayer(), e.getPlayer());
             e.setCancelled(true);
         }
     }
@@ -287,7 +296,10 @@ public class GHub extends JavaPlugin implements Listener, PluginMessageListener 
         if (args[0].equalsIgnoreCase("reload")) {
             if (!sender.hasPermission("ghub.reload")) { sender.sendMessage(getMessage("no-permission", null)); return true; }
             loadConfig();
-            for (Player p : Bukkit.getOnlinePlayers()) giveSpecialItem(p);
+            for (Player p : Bukkit.getOnlinePlayers()) {
+                giveSpecialItem(p);
+                applyDefaultGamemode(p);
+            }
             sender.sendMessage(getMessage("reload-success", null));
             return true;
         }
