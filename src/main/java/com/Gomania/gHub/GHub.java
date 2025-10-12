@@ -129,15 +129,30 @@ public class GHub extends JavaPlugin implements Listener, PluginMessageListener 
     }
 
     public void giveSpecialItem(Player player) {
-        if (player.getInventory().contains(specialItem)) return;
-
-        ItemStack clone = specialItem.clone();
-        if (player.getInventory().getItem(slot) != null) {
-            player.getInventory().addItem(clone);
-        } else {
-            player.getInventory().setItem(slot, clone);
+        // Ищем слот с уже существующим специальным предметом
+        int existingSlot = -1;
+        for (int i = 0; i < 9; i++) {
+            ItemStack item = player.getInventory().getItem(i);
+            if (isSpecialItem(item)) {
+                existingSlot = i;
+                break;
+            }
         }
+
+        // Если предмет уже есть в другом слоте, перемещаем в нужный слот
+        if (existingSlot != -1) {
+            if (existingSlot != slot) {
+                ItemStack item = player.getInventory().getItem(existingSlot);
+                player.getInventory().setItem(existingSlot, null);
+                player.getInventory().setItem(slot, item);
+            }
+            return; // Уже есть, ничего больше не делаем
+        }
+
+        // Если предмета нет, просто ставим в нужный слот
+        player.getInventory().setItem(slot, specialItem.clone());
     }
+
 
     public boolean isSpecialItem(ItemStack item) {
         if (item == null || !item.hasItemMeta()) return false;
