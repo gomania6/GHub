@@ -14,12 +14,12 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
-import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
+import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataType;
@@ -48,7 +48,6 @@ public class GHub extends JavaPlugin implements Listener, PluginMessageListener 
     private final int VOID_HEIGHT = -60;
     private final Map<UUID, Long> lastTeleportTime = new HashMap<>();
     private final Map<UUID, Boolean> isFallingIntoVoid = new HashMap<>();
-
     private boolean hasPlaceholderAPI = false;
 
     @Override
@@ -65,16 +64,16 @@ public class GHub extends JavaPlugin implements Listener, PluginMessageListener 
         getServer().getMessenger().registerIncomingPluginChannel(this, "BungeeCord", this);
 
         hasPlaceholderAPI = Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null;
-        if (hasPlaceholderAPI) getLogger().info("PlaceholderAPI found! Placeholders supported.");
+        if (hasPlaceholderAPI) getLogger().info("PlaceholderAPI найден! Поддержка плейсхолдеров включена.");
 
-        getLogger().info("GHub enabled!");
+        getLogger().info("GHub включен!");
     }
 
     @Override
     public void onDisable() {
         lastTeleportTime.clear();
         isFallingIntoVoid.clear();
-        getLogger().info("GHub disabled!");
+        getLogger().info("GHub выключен!");
     }
 
     private void loadConfig() {
@@ -88,7 +87,7 @@ public class GHub extends JavaPlugin implements Listener, PluginMessageListener 
         File spawnFile = new File(getDataFolder(), "spawn.yml");
         if (!spawnFile.exists()) {
             try { spawnFile.createNewFile(); }
-            catch (IOException e) { getLogger().warning("Failed to create spawn.yml: " + e.getMessage()); }
+            catch (IOException e) { getLogger().warning("Не удалось создать spawn.yml: " + e.getMessage()); }
         }
         spawnConfig = YamlConfiguration.loadConfiguration(spawnFile);
 
@@ -106,7 +105,7 @@ public class GHub extends JavaPlugin implements Listener, PluginMessageListener 
 
     private void saveSpawnConfig() {
         try { spawnConfig.save(new File(getDataFolder(), "spawn.yml")); }
-        catch (IOException e) { getLogger().warning("Failed to save spawn.yml: " + e.getMessage()); }
+        catch (IOException e) { getLogger().warning("Не удалось сохранить spawn.yml: " + e.getMessage()); }
     }
 
     private void loadItemSettings() {
@@ -130,10 +129,14 @@ public class GHub extends JavaPlugin implements Listener, PluginMessageListener 
     }
 
     public void giveSpecialItem(Player player) {
-        for (int i = 0; i < 9; i++) {
-            if (isSpecialItem(player.getInventory().getItem(i))) return;
+        if (player.getInventory().contains(specialItem)) return;
+
+        ItemStack clone = specialItem.clone();
+        if (player.getInventory().getItem(slot) != null) {
+            player.getInventory().addItem(clone);
+        } else {
+            player.getInventory().setItem(slot, clone);
         }
-        player.getInventory().setItem(slot, specialItem.clone());
     }
 
     public boolean isSpecialItem(ItemStack item) {
@@ -147,20 +150,15 @@ public class GHub extends JavaPlugin implements Listener, PluginMessageListener 
 
         String command = function;
 
-        if (player != null) {
-            command = processPlaceholders(player, command);
-        } else {
-            if (command.contains("%player_name%")) {
-                sender.sendMessage(ChatColor.RED + "Ошибка: %player_name% не может быть использован из консоли без игрока!");
-                return;
-            }
+        if (player != null) command = processPlaceholders(player, command);
+        else if (command.contains("%player_name%")) {
+            sender.sendMessage(ChatColor.RED + "Ошибка: %player_name% нельзя использовать из консоли без игрока!");
+            return;
         }
 
         if (command.startsWith("[console]")) {
-            command = command.replace("[console]", "").trim();
-            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), command);
-        }
-        else if (command.startsWith("[bungee]") && player != null) {
+            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), command.replace("[console]", "").trim());
+        } else if (command.startsWith("[bungee]") && player != null) {
             String server = command.replace("[bungee]", "").trim();
             ByteArrayDataOutput out = ByteStreams.newDataOutput();
             out.writeUTF("Connect");
@@ -177,7 +175,7 @@ public class GHub extends JavaPlugin implements Listener, PluginMessageListener 
                 Method m = papi.getMethod("setPlaceholders", Player.class, String.class);
                 Object result = m.invoke(null, player, text);
                 if (result instanceof String) text = (String) result;
-            } catch (Exception e) { getLogger().warning("PAPI placeholder failed: " + e.getMessage()); }
+            } catch (Exception e) { getLogger().warning("Ошибка PAPI: " + e.getMessage()); }
         }
         return ChatColor.translateAlternateColorCodes('&', text);
     }
@@ -201,24 +199,19 @@ public class GHub extends JavaPlugin implements Listener, PluginMessageListener 
     private void applyDefaultGamemode(Player player) {
         if (config.getBoolean("gamemode.enabled", false)) {
             String gmName = config.getString("gamemode.default", "ADVENTURE").toUpperCase();
-            try {
-                player.setGameMode(GameMode.valueOf(gmName));
-            } catch (IllegalArgumentException e) {
-                getLogger().warning("Неверный режим игры в config.yml: " + gmName);
-            }
+            try { player.setGameMode(GameMode.valueOf(gmName)); }
+            catch (IllegalArgumentException e) { getLogger().warning("Неверный режим игры в config.yml: " + gmName); }
         }
     }
 
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent e) {
         Player p = e.getPlayer();
-
         if (spawnLocation != null) {
             p.teleport(spawnLocation);
             if (config.getBoolean("messages.welcome-spawn-enabled", true))
                 p.sendMessage(getMessage("welcome-spawn", p));
         }
-
         giveSpecialItem(p);
         applyDefaultGamemode(p);
     }
@@ -227,7 +220,11 @@ public class GHub extends JavaPlugin implements Listener, PluginMessageListener 
     public void onPlayerMove(PlayerMoveEvent e) {
         Player p = e.getPlayer();
         UUID id = p.getUniqueId();
-        if (spawnLocation != null && p.getLocation().getY() <= VOID_HEIGHT && p.getVelocity().getY() < -0.5) {
+
+        if (spawnLocation != null && p.getLocation().getY() <= VOID_HEIGHT
+                && p.getVelocity().getY() < -0.5
+                && p.getGameMode() != GameMode.CREATIVE
+                && p.getGameMode() != GameMode.SPECTATOR) {
             long now = System.currentTimeMillis();
             if (now - lastTeleportTime.getOrDefault(id, 0L) > 3000) {
                 isFallingIntoVoid.put(id, true);
@@ -242,9 +239,7 @@ public class GHub extends JavaPlugin implements Listener, PluginMessageListener 
     public void onPlayerDeath(PlayerDeathEvent e) {
         Player p = e.getEntity();
         if (spawnLocation != null && !isFallingIntoVoid.getOrDefault(p.getUniqueId(), false)) {
-            Bukkit.getScheduler().runTaskLater(this, () -> {
-                if (p.isOnline()) p.spigot().respawn();
-            }, 5L);
+            Bukkit.getScheduler().runTaskLater(this, () -> { if (p.isOnline()) p.spigot().respawn(); }, 5L);
         }
     }
 
@@ -305,10 +300,10 @@ public class GHub extends JavaPlugin implements Listener, PluginMessageListener 
         }
 
         if (args[0].equalsIgnoreCase("spawn")) {
-            if (!(sender instanceof Player)) { sender.sendMessage(ChatColor.RED + "Only players!"); return true; }
+            if (!(sender instanceof Player)) { sender.sendMessage(ChatColor.RED + "Только игроки!"); return true; }
             if (!sender.hasPermission("ghub.spawn")) { sender.sendMessage(getMessage("no-permission", (Player) sender)); return true; }
             setSpawnLocation(((Player) sender).getLocation());
-            sender.sendMessage(ChatColor.GREEN + "Spawn location set!");
+            sender.sendMessage(ChatColor.GREEN + "Спавн установлен!");
             return true;
         }
 

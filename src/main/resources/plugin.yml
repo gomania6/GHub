@@ -1,7 +1,7 @@
 name: gHub
-version: '1.0'
+version: '1.1.2'
 main: com.Gomania.gHub.GHub
-api-version: '1.21'
+api-version: '1.16'
 depends: [ProtocolLib]
 softdepend: [PlaceholderAPI]
 
