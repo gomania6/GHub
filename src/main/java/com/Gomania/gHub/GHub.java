@@ -49,6 +49,7 @@ public class GHub extends JavaPlugin implements Listener, PluginMessageListener 
     private final Map<UUID, Long> lastTeleportTime = new HashMap<>();
     private final Map<UUID, Boolean> isFallingIntoVoid = new HashMap<>();
     private boolean hasPlaceholderAPI = false;
+    private boolean itemEnabled; // <-- ДОБАВЛЕНО
 
     @Override
     public void onEnable() {
@@ -109,6 +110,13 @@ public class GHub extends JavaPlugin implements Listener, PluginMessageListener 
     }
 
     private void loadItemSettings() {
+        itemEnabled = config.getBoolean("item.enabled", true); // <-- ДОБАВЛЕНО
+
+        if (!itemEnabled) { // <-- ДОБАВЛЕНО
+            specialItem = null; // Если предмет выключен, обнуляем его
+            return;
+        }
+
         Material material;
         try { material = Material.valueOf(config.getString("item.material", "COMPASS").toUpperCase()); }
         catch (IllegalArgumentException e) { material = Material.COMPASS; }
@@ -129,9 +137,11 @@ public class GHub extends JavaPlugin implements Listener, PluginMessageListener 
     }
 
     public void giveSpecialItem(Player player) {
-        // Ищем слот с уже существующим специальным предметом
+        // --- ЛОГИКА ПОЛНОСТЬЮ ПЕРЕПИСАНА ---
+
+        // 1. Ищем предмет ВЕЗДЕ в инвентаре
         int existingSlot = -1;
-        for (int i = 0; i < 9; i++) {
+        for (int i = 0; i < player.getInventory().getSize(); i++) {
             ItemStack item = player.getInventory().getItem(i);
             if (isSpecialItem(item)) {
                 existingSlot = i;
@@ -139,17 +149,36 @@ public class GHub extends JavaPlugin implements Listener, PluginMessageListener 
             }
         }
 
-        // Если предмет уже есть в другом слоте, перемещаем в нужный слот
-        if (existingSlot != -1) {
-            if (existingSlot != slot) {
-                ItemStack item = player.getInventory().getItem(existingSlot);
-                player.getInventory().setItem(existingSlot, null);
-                player.getInventory().setItem(slot, item);
+        if (!itemEnabled) {
+            // 2. ВЫКЛЮЧЕНО: Если предмет найден, удаляем его.
+            if (existingSlot != -1) {
+                player.getInventory().clear(existingSlot);
             }
-            return; // Уже есть, ничего больше не делаем
+            return; // Выходим, не выдаем
         }
 
-        // Если предмета нет, просто ставим в нужный слот
+        // 3. ВКЛЮЧЕНО: Проверка, что предмет загружен (на случай ошибки конфига)
+        if (specialItem == null) {
+            getLogger().warning("specialItem is null, but itemEnabled=true. Проверьте конфиг.");
+            return;
+        }
+
+        // 4. ВКЛЮЧЕНО: Предмет уже есть у игрока
+        if (existingSlot != -1) {
+            // 4а. Он в ПРАВИЛЬНОМ слоте. Просто обновляем его (на случай смены конфига)
+            if (existingSlot == slot) {
+                player.getInventory().setItem(slot, specialItem.clone());
+                return;
+            }
+            // 4b. Он в НЕПРАВИЛЬНОМ слоте. Перемещаем.
+            else {
+                player.getInventory().clear(existingSlot); // Убираем со старого места
+                player.getInventory().setItem(slot, specialItem.clone()); // Ставим в нужный слот
+                return;
+            }
+        }
+
+        // 5. ВКЛЮЧЕНО: Предмета нет. Выдаем в нужный слот.
         player.getInventory().setItem(slot, specialItem.clone());
     }
 
@@ -227,7 +256,7 @@ public class GHub extends JavaPlugin implements Listener, PluginMessageListener 
             if (config.getBoolean("messages.welcome-spawn-enabled", true))
                 p.sendMessage(getMessage("welcome-spawn", p));
         }
-        giveSpecialItem(p);
+        giveSpecialItem(p); // Эта функция теперь также удаляет предмет, если он выключен
         applyDefaultGamemode(p);
     }
 
@@ -267,6 +296,7 @@ public class GHub extends JavaPlugin implements Listener, PluginMessageListener 
 
     @EventHandler
     public void onPlayerInteract(PlayerInteractEvent e) {
+        if (!itemEnabled) return; // <-- ДОБАВЛЕНО
         if (e.getItem() != null && isSpecialItem(e.getItem())) {
             executeFunction(e.getPlayer(), e.getPlayer());
             e.setCancelled(true);
@@ -275,11 +305,13 @@ public class GHub extends JavaPlugin implements Listener, PluginMessageListener 
 
     @EventHandler
     public void onInventoryClick(InventoryClickEvent e) {
+        if (!itemEnabled) return; // <-- ДОБАВЛЕНО
         if (isSpecialItem(e.getCurrentItem()) || isSpecialItem(e.getCursor())) e.setCancelled(true);
     }
 
     @EventHandler
     public void onPlayerDropItem(PlayerDropItemEvent e) {
+        if (!itemEnabled) return; // <-- ДОБАВЛЕНО
         if (isSpecialItem(e.getItemDrop().getItemStack())) {
             e.setCancelled(true);
             e.getPlayer().sendMessage(getMessage("cannot-drop", e.getPlayer()));
@@ -307,7 +339,7 @@ public class GHub extends JavaPlugin implements Listener, PluginMessageListener 
             if (!sender.hasPermission("ghub.reload")) { sender.sendMessage(getMessage("no-permission", null)); return true; }
             loadConfig();
             for (Player p : Bukkit.getOnlinePlayers()) {
-                giveSpecialItem(p);
+                giveSpecialItem(p); // Эта функция теперь также удаляет предмет, если он выключен
                 applyDefaultGamemode(p);
             }
             sender.sendMessage(getMessage("reload-success", null));

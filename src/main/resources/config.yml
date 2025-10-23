@@ -2,6 +2,7 @@
 
 # Предмет для взаимодействия
 item:
+  enabled: true          # true - предмет будет выдаваться и работать, false - предмет будет отключен и удален у игроков
   material: COMPASS      # Материал предмета
   slot: 0                # Слот в хотбаре (0-8)
   name: "&6Server Selector"  # Название предмета с цветами
@@ -9,6 +10,11 @@ item:
     - "&7Кликните, чтобы открыть меню"
     - "&7Выберите сервер для перехода"
   function: "[bungee]lobby"  # [console]команда или [bungee]сервер
+
+# Режим игры
+gamemode:
+  enabled: false         # Включить/выключить смену режима игры при входе
+  default: "ADVENTURE" # Режим игры по умолчанию (SURVIVAL, CREATIVE, ADVENTURE, SPECTATOR)
 
 # Сообщения
 messages:
@@ -18,5 +24,5 @@ messages:
   reload-success: "&aКонфиг успешно перезагружен!"
   usage: "&eИспользование: /ghub [reload|spawn]"
 
-# Сообщение при спавне включено/выключено
+  # Сообщение при спавне включено/выключено
   welcome-spawn-enabled: true
