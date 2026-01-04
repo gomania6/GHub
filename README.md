@@ -1,7 +1,3 @@
-Конечно! Вот переведённая на английский версия вашего README/Modrinth описания:
-
----
-
 # GHub — Hub Utilities Plugin for Minecraft
 
 **Version:** 1.0
