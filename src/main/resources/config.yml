@@ -1,28 +1,259 @@
-# === Основной конфиг GHub ===
+# ==============================
+# gChat Configuration
+# Discord: https://discord.gg/n4HQQ8erYs
+# ==============================
 
-# Предмет для взаимодействия
-item:
-  enabled: true          # true - предмет будет выдаваться и работать, false - предмет будет отключен и удален у игроков
-  material: COMPASS      # Материал предмета
-  slot: 0                # Слот в хотбаре (0-8)
-  name: "&6Server Selector"  # Название предмета с цветами
-  lore:
-    - "&7Кликните, чтобы открыть меню"
-    - "&7Выберите сервер для перехода"
-  function: "[bungee]lobby"  # [console]команда или [bungee]сервер
+enabled: true
+language: ru # Available: ru, en, ua, pl, es, pt
+default-chat-mode: local
+log-to-console: true
+reload-cooldown: 5
 
-# Режим игры
-gamemode:
-  enabled: false         # Включить/выключить смену режима игры при входе
-  default: "ADVENTURE" # Режим игры по умолчанию (SURVIVAL, CREATIVE, ADVENTURE, SPECTATOR)
+logging:
+  enabled: true
+  # Формат времени в логах
+  timestamp-format: "[HH:mm:ss] "
+  # Автоматическое удаление старых логов
+  auto-delete:
+    enabled: true
+    days: 30 # Хранить логи за последние 30 дней
 
-# Сообщения
-messages:
-  welcome-spawn: "&aДобро пожаловать на спавн!"
-  cannot-drop: "&cВы не можете выбросить этот предмет!"
-  no-permission: "&cУ вас нет прав для этого действия!"
-  reload-success: "&aКонфиг успешно перезагружен!"
-  usage: "&eИспользование: /ghub [reload|spawn]"
+# Personal player settings (/settings)
+player-settings:
+  enabled: true
 
-  # Сообщение при спавне включено/выключено
-  welcome-spawn-enabled: true
+social-spy:
+  enabled: true
+  format: "&8[&cSpy&8] &f%sender% &7-> &f%receiver%&7: &f%message%"
+  permission: "gchat.socialspy"
+
+advancements:
+  # Disable duplicate system messages from the server itself.
+  # (The plugin will automatically set /gamerule announceAdvancements false in all worlds)
+  disable-vanilla-announcements: true
+
+# ==============================
+# Interactivity (JSON)
+# ==============================
+interactive-chat:
+  enabled: true
+
+  # What to do when hovering over a nickname (HOVER)
+  hover:
+    enabled: true
+    text:
+      - "&eИнформация об игроке:"
+      - "&7Ник: &f%player_name%"
+      - "&7Ранг: &f%luckperms_prefix%"
+      - ""
+      - "&eНажмите, чтобы написать сообщение"
+
+  # What to do when clicking on a nickname (CLICK)
+  click:
+    enabled: true
+    action: SUGGEST_COMMAND
+    value: "/msg %player_name% "
+
+  item-showcase:
+    enabled: true
+    placeholder: "[item]"
+    format: "&8[&f%amount%x %item_name%&8]"
+    empty-hand-message: "&cУ вас в руке ничего нет для показа!"
+    cooldown: 10
+
+  inv-showcase:
+    enabled: true
+    placeholder: "[inv]"
+    format: "&8[&bИнвентарь %player_name%&8]"
+    hover-header: "&eИнвентарь игрока &f%player_name%&e:"
+    hover-empty: "&7Пусто"
+    cooldown: 15
+
+  ender-showcase:
+    enabled: true
+    placeholder: "[ender]"
+    format: "&8[&dЭндерчест %player_name%&8]"
+    hover-header: "&5Эндерчест игрока &f%player_name%&5:"
+    hover-empty: "&7Пусто"
+    cooldown: 15
+
+
+# ==============================
+# Local/Global chat
+# ==============================
+local-chat:
+  enabled: true
+  format: "&8[Локально]"
+  radius: 100
+  show-silent-message: true
+  show-disabled-local-chat: true
+
+global-chat:
+  enabled: true
+  format: "&8[Глобально]"
+
+# ==============================
+# Group formats
+# ==============================
+# COLOR CHEAT SHEET:
+# Standard colors: &a, &b, &c, &l (bold), etc.
+# HEX colors: &#RRGGBB (example: &#FF0000 - red)
+# Gradients: {#START>}text{#END<} (example: {#FF0000>}Fiery text{#FFFF00<})
+# ------------------------------
+
+group-formats:
+  legend: "%gchat_format%{#ff69b4>}%player_name%{#8a2be2<} &7» %message%"
+  emerald: "%gchat_format%{#50C878>}%player_name%{#00FF00<} &7» %message%"
+  diamond: "%gchat_format%{#00BFFF>}%player_name%{#1E90FF<} &7» %message%"
+
+# Default format.
+# You can add %gchat_towny% here to display the town.
+default-format: "%gchat_format%%luckperms_prefix%%player_name%&7 » %message%"
+
+# ==============================
+# Restrictions
+# ==============================
+max-message-length: 256
+message-cooldown:
+  enabled: true
+  seconds: 3
+  block-duplicates: true
+
+allow-colors: true
+allow-gradients: true
+
+# ==============================
+# Filters
+# ==============================
+filter:
+  enabled: true
+  block-message: false
+  words:
+    - дурак
+    - идиот
+  regex-enabled: true # <-- NEW
+  regex-patterns:
+    - "(?i)д[\\W_]*у[\\W_]*р[\\W_]*а[\\W_]*к"
+blocked-commands:
+  - "me"
+  - "say"
+  - "pl"
+
+
+
+# ==============================
+# Moderation (Simple mode)
+# ==============================
+# Chat protection settings, understandable for everyone.
+moderation:
+  # Block links (any http/https/www)
+  block-links: true
+
+  # Block IP addresses (advertising other servers)
+  block-ips: true
+
+  # Anti-CAPS LOCK protection (UPPERCASE LETTERS)
+  anti-caps:
+    enabled: true
+    min-length: 5        # Minimum message length to check
+    max-percentage: 70   # Maximum caps % (if more - convert to lowercase)
+    bypass-permission: "gchat.bypass.caps"
+
+# ==============================
+# Overhead messages (Chat Bubbles)
+# ==============================
+chat-bubbles:
+  enabled: false
+  # Overhead text format (%message% - message)
+  format: "&f%message%"
+  # How many seconds the message stays
+  display-time: 5
+  # Height offset above the player's head
+  height-offset: 2.3
+  # Line length before wrapping (if the message is long)
+  line-length: 40
+  # Filter colors in the bubble (so players don't use acid colors above their heads)
+  strip-colors: false
+
+# ==============================
+# Messages
+# ==============================
+first-join-messages:
+  default: "&a» &eДобро пожаловать на сервер, &#ff69b4%player_name%&e! Это твой первый вход."
+
+join-messages:
+  default: "&a» &#ff69b4%player_name%"
+  moder: "&a» {#ff69b4>}%player_name%{#8a2be2<}"
+
+quit-messages:
+  default: "&c« &#bf7f3f%player_name%"
+  moder: "&c« {#ff69b4>}%player_name%{#8a2be2<}"
+
+private-message:
+  enabled: true
+  format-to-receiver: "&7[&aЛС от %sender%&7]: &f%message%"
+  format-to-sender: "&7[&aЛС для %receiver%&7]: &f%message%"
+  sound-enabled: true
+  sound: "ENTITY_EXPERIENCE_ORB_PICKUP"
+  action-bar:
+    enabled: true
+    format: "&aВам пишет %sender%"
+
+death-messages:
+  enabled: true
+  hide-default-message: true
+  player-kill:
+    - "&c☠ %player% был жестоко убит игроком %killer%."
+    - "&c☠ %killer% отправил %player% на респавн."
+    - "&c☠ %player% не пережил встречу с %killer%."
+  mob-kill: "&c☠ %player% пал в бою с %killer_mob%."
+  causes:
+    FALL:
+      - "&c☠ %player% забыл, как летать, и разбился."
+      - "&c☠ %player% совершил неудачный прыжок веры."
+    LAVA: "&c☠ %player% решил искупаться в лаве."
+    VOID: "&c☠ %player% провалился сквозь ткань реальности."
+    FIRE_TICK: "&c☠ %player% сгорел дотла."
+    DROWNING: "&c☠ %player% забыл вынырнуть за воздухом."
+  other: "&c☠ %player% трагически погиб."
+
+player-mentions:
+  enabled: true
+  prefix: "@"
+  highlight-format: "&e&l@%player%&r"
+  sound-enabled: true
+  sound: "ENTITY_EXPERIENCE_ORB_PICKUP"
+  sound-volume: 1.0
+  sound-pitch: 1.5
+  cooldown: 10
+  action-bar:
+    enabled: true
+    text: "&eВас упомянул %player%"
+  everyone:
+    enabled: true
+    trigger: "@everyone"
+    format: "&c&l@everyone&r"
+    sound-enabled: true
+    sound: "BLOCK_NOTE_BLOCK_PLING"
+    action-bar-text: "&cВнимание! Общее упоминание от %player%"
+
+# ==============================
+# Custom channels
+# ==============================
+channels:
+  staff:
+    command: "sc"
+    aliases: ["staffchat", "a"]
+    permission: "gchat.channel.staff"
+    format: "&c[Staff] &f%player_name%: &e%message%"
+    range: -1
+    log-to-console: true
+
+  trade:
+    command: "trade"
+    aliases: ["tr"]
+    permission: ""
+    format: "&6[Торговля] &7%player_name%: &f%message%"
+    range: -1
+    cost: 10.0
+

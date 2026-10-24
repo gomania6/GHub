@@ -1,0 +1,123 @@
+# gChat Messages (Portuguese)
+
+prefix: "&8[&6gChat&8]"
+
+# Mensagens básicas
+no-permission: "{prefix} &cVocê não tem permissão para executar este comando."
+players-only: "{prefix} &cApenas jogadores podem executar este comando."
+config-reloaded: "{prefix} &aConfiguração recarregada."
+unknown-command: "{prefix} &cComando desconhecido."
+reload-cooldown: "{prefix} &cAguarde {time} segundos antes de recarregar novamente."
+player-not-found: "{prefix} &cJogador não encontrado ou offline."
+
+# Restrições de chat
+message-cooldown: "{prefix} &cAguarde {time} segundos antes de enviar outra mensagem."
+mention-cooldown: "{prefix} &cAguarde {time} segundos antes de mencionar um jogador novamente."
+message-too-long: "{prefix} &cA mensagem é muito longa. Máximo de {max} caracteres."
+message-blocked: "{prefix} &cSua mensagem foi bloqueada pelo filtro."
+illegal-link: "{prefix} &cNão é permitido enviar links."
+muted-message: "{prefix} &cVocê está mutado e não pode escrever no chat."
+
+# Chat local/global
+local-chat-disabled: "{prefix} &cO chat local está desativado no servidor."
+local-chat-silent: "{prefix} &cNinguém ouviu sua mensagem local."
+chat-mode-global: "{prefix} &aVocê mudou para o chat &6global&a."
+chat-mode-local: "{prefix} &aVocê mudou para o chat &6local&a."
+
+# Moderação de chat
+chat-muted-broadcast: "{prefix} &c&lATENÇÃO! &fO chat foi temporariamente desativado por um administrador."
+chat-unmuted-broadcast: "{prefix} &a&lATENÇÃO! &fO chat foi ativado novamente. Bom bate-papo!"
+chat-is-muted: "{prefix} &cO chat está atualmente desativado por um administrador. Você não pode escrever!"
+chat-cleared: "{prefix} &aO chat foi limpo pelo administrador &f%admin%&a."
+message-duplicate: "{prefix} &cPor favor, não envie a mesma mensagem repetidamente."
+
+# Chat interativo
+click-to-open-url: "&aClique para abrir o link\n&7%url%"
+click-to-write: "&aClique para escrever para %player%"
+click-to-reply: "&aClique para responder a %player%"
+
+# Uso de comandos
+usage-msg: "{prefix} &cUso: /msg <jogador> <mensagem>"
+reply-usage: "{prefix} &cUso: /r <mensagem>"
+channel-usage: "{prefix} &cUso: /%cmd% <mensagem>"
+ignore-usage: "{prefix} &cUso: /ignore <jogador>"
+
+# Sistema de ignorar
+ignore-self: "{prefix} &cVocê não pode ignorar a si mesmo."
+ignore-bypass: "{prefix} &cEste jogador não pode ser adicionado à lista negra."
+ignore-added: "{prefix} &aVocê adicionou &e%player% &aà lista negra."
+ignore-removed: "{prefix} &eVocê removeu &a%player% &eda lista negra."
+
+# Configurações de jogadores
+settings-no-permission-color: "{prefix} &cVocê não tem permissão para mudar a cor das mensagens."
+
+# Menu de configurações
+settings-disabled: "{prefix} &cEste recurso está desativado no servidor."
+settings-players-only: "{prefix} &cApenas jogadores podem usar este comando."
+settings-menu-header: "&6=== Configurações Pessoais de Chat ==="
+settings-menu-deaths: "&e/settings deaths &7- Mensagens de morte ({status}&7)"
+settings-menu-joinquit: "&e/settings joinquit &7- Mensagens de entrada/saída ({status}&7)"
+settings-menu-advancements: "&e/settings advancements &7- Mensagens de conquistas ({status}&7)"
+settings-menu-global: "&e/settings global &7- Chat global ({status}&7)"
+settings-menu-sound: "&e/settings sound <xp|pling|anvil|none|default> &7- Som de menção"
+settings-menu-color: "&e/settings color <chat|full> [código] &7- Cor da mensagem (Atual: {color}&7)"
+settings-status-on: "&aLigado"
+settings-status-off: "&cDesligado"
+settings-color-default: "&7Padrão"
+
+# Ações nas configurações
+settings-deaths-on: "{prefix} &aMensagens de morte ativadas."
+settings-deaths-off: "{prefix} &aMensagens de morte desativadas."
+settings-joinquit-on: "{prefix} &aMensagens de entrada/saída ativadas."
+settings-joinquit-off: "{prefix} &aMensagens de entrada/saída desativadas."
+settings-adv-on: "{prefix} &aMensagens de conquistas ativadas."
+settings-adv-off: "{prefix} &aMensagens de conquistas desativadas."
+settings-global-on: "{prefix} &aChat global ativado."
+settings-global-off: "{prefix} &aChat global desativado."
+settings-sound-usage: "{prefix} &cUso: /settings sound <xp|pling|anvil|none|default>"
+settings-sound-changed: "{prefix} &aSom de menção alterado para: &e{sound}"
+settings-sound-invalid: "{prefix} &cSom desconhecido. Disponíveis: xp, pling, anvil, none, default."
+settings-color-usage: "{prefix} &cUso: /settings color <chat|full> [código]"
+settings-color-reset: "{prefix} &aA cor da mensagem foi redefinida para o padrão."
+settings-color-changed: "{prefix} &aCor alterada para {type}! Exemplo: {example}"
+settings-color-type-full: "formato completo"
+settings-color-type-chat: "apenas texto"
+settings-unknown: "{prefix} &cConfiguração desconhecida. Use /settings para ajuda."
+
+# Mensagens adicionais do sistema
+pm-disabled: "{prefix} &cAs mensagens privadas estão desativadas no servidor."
+pm-ignored-target: "{prefix} &cEste jogador está a ignorar você."
+pm-ignored-self: "{prefix} &cVocê não pode enviar mensagens para alguém na sua lista negra."
+pm-nobody-to-reply: "{prefix} &cVocê não tem ninguém para responder."
+auth-required: "{prefix} &cPor favor, faça login para usar o chat."
+global-chat-disabled-self: "{prefix} &cVocê desativou o chat global nas configurações (/settings)."
+ip-blocked: "{prefix} &cNão é permitido divulgar outros servidores."
+
+tag-cooldown-item: "{prefix} &cAguarde {time}s antes de mostrar um item novamente."
+tag-cooldown-inv: "{prefix} &cAguarde {time}s antes de mostrar o inventário novamente."
+tag-cooldown-ender: "{prefix} &cAguarde {time}s antes de mostrar o baú do ender novamente."
+
+alert-format: "&8[&c!&8] &cAlerta &8| &f%player% &7(%reason%): &f%message%"
+alert-reason-link: "Link"
+alert-reason-badword: "Palavra proibida"
+
+broadcast-usage: "{prefix} &6Uso: /broadcast <número|next|reload|say <mensagem>>"
+broadcast-usage-say: "{prefix} &cUso: /broadcast say <mensagem>"
+broadcast-reloaded: "{prefix} &aConfiguração de broadcast recarregada e tarefa reiniciada!"
+broadcast-next-sent: "{prefix} &aPróxima mensagem de broadcast enviada!"
+broadcast-invalid-index: "{prefix} &cNúmero inválido. Mensagens disponíveis: {max} (de 1 a {max})."
+broadcast-sent-number: "{prefix} &aMensagem de broadcast #{index} enviada!"
+broadcast-invalid-argument: "{prefix} &cArgumento inválido. Use: número, next, reload ou say <mensagem>."
+
+item-none: "&c(Sem item)"
+item-enchanted: "&7(Encantado)"
+
+# Ajuda
+help:
+  - "&6=== Ajuda do gChat ==="
+  - "&e/gchat reload &7- Recarregar o plugin"
+  - "&e/gchat help &7- Mostrar esta página"
+  - "&e/msg <jogador> <texto> &7- Mensagem privada"
+  - "&e/r <texto> &7- Resposta rápida"
+  - "&e/g &7- Chat global"
+  - "&e/l &7- Chat local"

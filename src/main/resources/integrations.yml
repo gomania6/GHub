@@ -1,0 +1,43 @@
+# ==========================================
+# Settings for integrations with other plugins
+# ==========================================
+
+# --- Punishment System (Mute Hooks) ---
+mute-hooks:
+  essentials: true
+  advancedban: true
+
+# --- DiscordSRV ---
+# Allows broadcasting chat between Minecraft and Discord.
+discord:
+  enabled: false
+  # Message format from Discord to Minecraft
+  # Available placeholders: %user%, %role_color%, %role_name%, %message%
+  format: "&9[Discord | %role_color%%role_name%&r %user%&9] &f%message%"
+
+  # Whether to send messages from Minecraft to Discord?
+  mc-to-discord: true
+
+  # Whether to send messages from Discord to Minecraft?
+  discord-to-mc: true
+
+
+
+# --- Towny ---
+# Displaying names of towns and nations in chat.
+# Placeholders: %gchat_towny%, %gchat_towny_town%, %gchat_towny_nation%
+towny:
+  enabled: true
+
+  # If true, the town/nation TAG will be used (if set).
+  # If false or no tag is set, the full name will be used.
+  prefer-tag: true
+
+  # Display formats
+  formats:
+    # Town only
+    town: "&f[&a%s&f] "
+    # Nation only
+    nation: "&f[&#FF5656%s&f] "
+    # Both town and nation (1 - nation, 2 - town)
+    both: "&f[&c%s&f | &a%s&f] "

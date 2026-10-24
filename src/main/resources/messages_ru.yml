@@ -1,0 +1,127 @@
+# gChat Messages (Russian)
+
+prefix: "&8[&6gChat&8]"
+
+# Основные сообщения
+no-permission: "{prefix} &cУ вас нет прав на выполнение этой команды."
+players-only: "{prefix} &cТолько игроки могут выполнить эту команду."
+config-reloaded: "{prefix} &aКонфигурация перезагружена."
+unknown-command: "{prefix} &cНеизвестная команда."
+reload-cooldown: "{prefix} &cПодождите {time} секунд перед повторной перезагрузкой."
+player-not-found: "{prefix} &cИгрок не найден или оффлайн."
+
+# Ограничения чата
+message-cooldown: "{prefix} &cПодождите {time} секунд перед отправкой следующего сообщения."
+mention-cooldown: "{prefix} &cПодождите {time} секунд перед следующим упоминанием игрока."
+message-too-long: "{prefix} &cСообщение слишком длинное. Максимум {max} символов."
+message-blocked: "{prefix} &cВаше сообщение заблокировано фильтром."
+illegal-link: "{prefix} &cЗапрещено отправлять ссылки."
+muted-message: "{prefix} &cВы заглушены и не можете писать в чат."
+
+# Локальный/Глобальный чат
+local-chat-disabled: "{prefix} &cЛокальный чат отключён на сервере."
+local-chat-silent: "{prefix} &cНикто не услышал ваше локальное сообщение."
+chat-mode-global: "{prefix} &aВы переключились в &6глобальный &aчат."
+chat-mode-local: "{prefix} &aВы переключились в &6локальный &aчат."
+
+# Модерация чата
+chat-muted-broadcast: "{prefix} &c&lВНИМАНИЕ! &fЧат был временно отключен администратором."
+chat-unmuted-broadcast: "{prefix} &a&lВНИМАНИЕ! &fЧат снова включен. Приятного общения!"
+chat-is-muted: "{prefix} &cВ данный момент чат отключен администратором. Писать нельзя!"
+chat-cleared: "{prefix} &aЧат был очищен администратором &f%admin%&a."
+message-duplicate: "{prefix} &cПожалуйста, не отправляйте одно и то же сообщение повторно."
+
+# Интерактивный чат
+click-to-open-url: "&aНажмите, чтобы открыть ссылку\n&7%url%"
+click-to-write: "&aНажмите, чтобы написать %player%"
+click-to-reply: "&aНажмите, чтобы ответить %player%"
+
+# Использование команд (Usage)
+usage-msg: "{prefix} &cИспользование: /msg <игрок> <сообщение>"
+reply-usage: "{prefix} &cИспользование: /r <сообщение>"
+channel-usage: "{prefix} &cИспользование: /%cmd% <сообщение>"
+ignore-usage: "{prefix} &cИспользование: /ignore <игрок>"
+
+# Игнор система
+ignore-self: "{prefix} &cВы не можете игнорировать самого себя."
+ignore-bypass: "{prefix} &cЭтого игрока нельзя добавить в черный список."
+ignore-added: "{prefix} &aВы добавили &e%player% &aв черный список."
+ignore-removed: "{prefix} &eВы убрали &a%player% &eиз черного списка."
+
+# Настройки игроков
+settings-no-permission-color: "{prefix} &cУ вас нет прав на изменение цвета сообщений."
+
+# Меню настроек
+settings-disabled: "{prefix} &cЭта функция отключена на сервере."
+settings-players-only: "{prefix} &cЭту команду могут использовать только игроки."
+settings-menu-header: "&6=== Личные настройки чата ==="
+settings-menu-deaths: "&e/settings deaths &7- Сообщения о смертях ({status}&7)"
+settings-menu-joinquit: "&e/settings joinquit &7- Сообщения о входах/выходах ({status}&7)"
+settings-menu-advancements: "&e/settings advancements &7- Сообщения о достижениях ({status}&7)"
+settings-menu-global: "&e/settings global &7- Глобальный чат ({status}&7)"
+settings-menu-sound: "&e/settings sound <xp|pling|anvil|none|default> &7- Звук упоминания"
+settings-menu-color: "&e/settings color <chat|full> [код] &7- Цвет сообщений (Сейчас: {color}&7)"
+settings-status-on: "&aВкл"
+settings-status-off: "&cВыкл"
+settings-color-default: "&7Стандартный"
+
+# Дополнительные сообщения команд
+pm-disabled: "{prefix} &cЛичные сообщения отключены на сервере."
+pm-ignored-target: "{prefix} &cЭтот игрок вас игнорирует."
+pm-ignored-self: "{prefix} &cВы не можете писать тому, кто у вас в игноре."
+pm-nobody-to-reply: "{prefix} &cВам некому отвечать."
+auth-required: "{prefix} &cПожалуйста, авторизуйтесь для использования чата."
+global-chat-disabled-self: "{prefix} &cВы отключили глобальный чат в настройках (/settings)."
+ip-blocked: "{prefix} &cРеклама сторонних серверов запрещена."
+
+# Кулдауны интерактивных тегов
+tag-cooldown-item: "{prefix} &cПодождите {time}с перед показом предмета."
+tag-cooldown-inv: "{prefix} &cПодождите {time}с перед показом инвентаря."
+tag-cooldown-ender: "{prefix} &cПодождите {time}с перед показом эндерчеста."
+
+# Алерты модерации
+alert-format: "&8[&c!&8] &cАлерт &8| &f%player% &7(%reason%): &f%message%"
+alert-reason-link: "Ссылка"
+alert-reason-badword: "Запрещенное слово"
+
+# Сообщения /broadcast
+broadcast-usage: "{prefix} &6Использование: /broadcast <номер|next|reload|say <сообщение>>"
+broadcast-usage-say: "{prefix} &cИспользование: /broadcast say <сообщение>"
+broadcast-reloaded: "{prefix} &aBroadcast конфигурация перезагружена и задача перезапущена!"
+broadcast-next-sent: "{prefix} &aСледующее broadcast сообщение отправлено!"
+broadcast-invalid-index: "{prefix} &cНеверный номер. Доступно {max} сообщений (от 1 до {max})."
+broadcast-sent-number: "{prefix} &aBroadcast сообщение #{index} отправлено!"
+broadcast-invalid-argument: "{prefix} &cНеверный аргумент. Используйте: номер, next, reload или say <сообщение>."
+
+# Предметы и интерактивность
+item-none: "&c(Нет предмета)"
+item-enchanted: "&7(Зачаровано)"
+
+# Действия в настройках
+settings-deaths-on: "{prefix} &aОтображение смертей включено."
+settings-deaths-off: "{prefix} &aОтображение смертей выключено."
+settings-joinquit-on: "{prefix} &aОтображение входов/выходов включено."
+settings-joinquit-off: "{prefix} &aОтображение входов/выходов выключено."
+settings-adv-on: "{prefix} &aОтображение достижений включено."
+settings-adv-off: "{prefix} &aОтображение достижений выключено."
+settings-global-on: "{prefix} &aГлобальный чат включен."
+settings-global-off: "{prefix} &aГлобальный чат выключен."
+settings-sound-usage: "{prefix} &cИспользование: /settings sound <xp|pling|anvil|none|default>"
+settings-sound-changed: "{prefix} &aЗвук упоминаний изменен на: &e{sound}"
+settings-sound-invalid: "{prefix} &cНеизвестный звук. Доступны: xp, pling, anvil, none, default."
+settings-color-usage: "{prefix} &cИспользование: /settings color <chat|full> [код]"
+settings-color-reset: "{prefix} &aЦвет сообщений сброшен на стандартный."
+settings-color-changed: "{prefix} &aЦвет {type} изменен! Пример: {example}"
+settings-color-type-full: "всего формата"
+settings-color-type-chat: "только текста"
+settings-unknown: "{prefix} &cНеизвестная настройка. Используйте /settings для справки."
+
+# Помощь
+help:
+  - "&6=== gChat Помощь ==="
+  - "&e/gchat reload &7- Перезагрузить плагин"
+  - "&e/gchat help &7- Показать эту страницу"
+  - "&e/msg <игрок> <текст> &7- Личное сообщение"
+  - "&e/r <текст> &7- Быстрый ответ"
+  - "&e/g &7- Глобальный чат"
+  - "&e/l &7- Локальный чат"

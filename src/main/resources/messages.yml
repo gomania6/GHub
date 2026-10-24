@@ -1,0 +1,122 @@
+# gChat Messages (English)
+
+prefix: "&8[&6gChat&8]"
+
+# Basic messages
+no-permission: "{prefix} &cYou do not have permission to execute this command."
+players-only: "{prefix} &cOnly players can execute this command."
+config-reloaded: "{prefix} &aConfiguration reloaded."
+unknown-command: "{prefix} &cUnknown command."
+reload-cooldown: "{prefix} &cPlease wait {time} seconds before reloading again."
+player-not-found: "{prefix} &cPlayer not found or offline."
+
+# Chat restrictions
+message-cooldown: "{prefix} &cPlease wait {time} seconds before sending another message."
+mention-cooldown: "{prefix} &cPlease wait {time} seconds before mentioning a player again."
+message-too-long: "{prefix} &cMessage is too long. Maximum {max} characters."
+message-blocked: "{prefix} &cYour message was blocked by the filter."
+illegal-link: "{prefix} &cSending links is not allowed."
+muted-message: "{prefix} &cYou are muted and cannot write in the chat."
+
+# Local/Global chat
+local-chat-disabled: "{prefix} &cLocal chat is disabled on the server."
+local-chat-silent: "{prefix} &cNo one heard your local message."
+chat-mode-global: "{prefix} &aYou switched to &6global &achat."
+chat-mode-local: "{prefix} &aYou switched to &6local &achat."
+
+# Chat moderation
+chat-muted-broadcast: "{prefix} &c&lATTENTION! &fThe chat has been temporarily disabled by an administrator."
+chat-unmuted-broadcast: "{prefix} &a&lATTENTION! &fThe chat is enabled again. Enjoy chatting!"
+chat-is-muted: "{prefix} &cThe chat is currently disabled by an administrator. You cannot write!"
+chat-cleared: "{prefix} &aThe chat was cleared by administrator &f%admin%&a."
+message-duplicate: "{prefix} &cPlease do not send the same message repeatedly."
+
+# Interactive chat
+click-to-open-url: "&aClick to open the link\n&7%url%"
+click-to-write: "&aClick to message %player%"
+click-to-reply: "&aClick to reply to %player%"
+
+# Command usage
+usage-msg: "{prefix} &cUsage: /msg <player> <message>"
+reply-usage: "{prefix} &cUsage: /r <message>"
+channel-usage: "{prefix} &cUsage: /%cmd% <message>"
+ignore-usage: "{prefix} &cUsage: /ignore <player>"
+
+# Ignore system
+ignore-self: "{prefix} &cYou cannot ignore yourself."
+ignore-bypass: "{prefix} &cThis player cannot be added to the blacklist."
+ignore-added: "{prefix} &aYou added &e%player% &ato the blacklist."
+ignore-removed: "{prefix} &eYou removed &a%player% &efrom the blacklist."
+
+# Player settings
+settings-no-permission-color: "{prefix} &cYou do not have permission to change the message color."
+
+# Settings Menu
+settings-disabled: "{prefix} &cThis feature is disabled on the server."
+settings-players-only: "{prefix} &cOnly players can use this command."
+settings-menu-header: "&6=== Personal Chat Settings ==="
+settings-menu-deaths: "&e/settings deaths &7- Death messages ({status}&7)"
+settings-menu-joinquit: "&e/settings joinquit &7- Join/Quit messages ({status}&7)"
+settings-menu-advancements: "&e/settings advancements &7- Advancement messages ({status}&7)"
+settings-menu-global: "&e/settings global &7- Global chat ({status}&7)"
+settings-menu-sound: "&e/settings sound <xp|pling|anvil|none|default> &7- Mention sound"
+settings-menu-color: "&e/settings color <chat|full> [code] &7- Message color (Current: {color}&7)"
+settings-status-on: "&aOn"
+settings-status-off: "&cOff"
+settings-color-default: "&7Default"
+
+pm-disabled: "{prefix} &cPrivate messages are disabled on this server."
+pm-ignored-target: "{prefix} &cThis player is ignoring you."
+pm-ignored-self: "{prefix} &cYou cannot write to a player in your blacklist."
+pm-nobody-to-reply: "{prefix} &cYou have nobody to reply to."
+auth-required: "{prefix} &cPlease log in before using the chat."
+global-chat-disabled-self: "{prefix} &cYou have disabled global chat in /settings."
+ip-blocked: "{prefix} &cAdvertising other servers is not allowed."
+
+tag-cooldown-item: "{prefix} &cPlease wait {time}s before showing an item again."
+tag-cooldown-inv: "{prefix} &cPlease wait {time}s before showing your inventory again."
+tag-cooldown-ender: "{prefix} &cPlease wait {time}s before showing your ender chest again."
+
+alert-format: "&8[&c!&8] &cAlert &8| &f%player% &7(%reason%): &f%message%"
+alert-reason-link: "Link"
+alert-reason-badword: "Prohibited word"
+
+broadcast-usage: "{prefix} &6Usage: /broadcast <number|next|reload|say <message>>"
+broadcast-usage-say: "{prefix} &cUsage: /broadcast say <message>"
+broadcast-reloaded: "{prefix} &aBroadcast configuration reloaded and task restarted!"
+broadcast-next-sent: "{prefix} &aNext broadcast message sent!"
+broadcast-invalid-index: "{prefix} &cInvalid index. Available: {max} messages (1 to {max})."
+broadcast-sent-number: "{prefix} &aBroadcast message #{index} sent!"
+broadcast-invalid-argument: "{prefix} &cInvalid argument. Use: number, next, reload, or say <message>."
+
+item-none: "&c(No item)"
+item-enchanted: "&7(Enchanted)"
+
+# Settings Actions
+settings-deaths-on: "{prefix} &aDeath messages enabled."
+settings-deaths-off: "{prefix} &aDeath messages disabled."
+settings-joinquit-on: "{prefix} &aJoin/quit messages enabled."
+settings-joinquit-off: "{prefix} &aJoin/quit messages disabled."
+settings-adv-on: "{prefix} &aAdvancement messages enabled."
+settings-adv-off: "{prefix} &aAdvancement messages disabled."
+settings-global-on: "{prefix} &aGlobal chat enabled."
+settings-global-off: "{prefix} &aGlobal chat disabled."
+settings-sound-usage: "{prefix} &cUsage: /settings sound <xp|pling|anvil|none|default>"
+settings-sound-changed: "{prefix} &aMention sound changed to: &e{sound}"
+settings-sound-invalid: "{prefix} &cUnknown sound. Available: xp, pling, anvil, none, default."
+settings-color-usage: "{prefix} &cUsage: /settings color <chat|full> [code]"
+settings-color-reset: "{prefix} &aMessage color reset to default."
+settings-color-changed: "{prefix} &aColor for {type} changed! Example: {example}"
+settings-color-type-full: "full format"
+settings-color-type-chat: "text only"
+settings-unknown: "{prefix} &cUnknown setting. Use /settings for help."
+
+# Help
+help:
+  - "&6=== gChat Help ==="
+  - "&e/gchat reload &7- Reload the plugin"
+  - "&e/gchat help &7- Show this page"
+  - "&e/msg <player> <text> &7- Private message"
+  - "&e/r <text> &7- Quick reply"
+  - "&e/g &7- Global chat"
+  - "&e/l &7- Local chat"

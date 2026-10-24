@@ -1,22 +1,133 @@
-name: gHub
-version: '1.1.2'
-main: com.Gomania.gHub.GHub
-api-version: '1.16'
-depends: [ProtocolLib]
-softdepend: [PlaceholderAPI]
-
+name: gChat
+version: 2.10.1
+main: com.Gomania.gChat.GChat
+api-version: "1.20"
+softdepend:
+  - PlaceholderAPI
+  - LuckPerms
+  - DiscordSRV
+  - Essentials
+  - AdvancedBan
+  - AuthMe
+  - Towny
+  - gMute
 commands:
-  ghub:
-    description: Основная команда для управления gHub
-    usage: /ghub [reload|spawn]
-    permission: ghub.use
+  gchat:
+    description: Основная команда gChat
+    aliases: [gch]
+  g:
+    description: Отправить глобальное сообщение или переключить чат
+    aliases: [gc]
+  l:
+    description: Отправить локальное сообщение или переключить чат
+    aliases: [lc]
+  broadcast:
+    description: Управление broadcast-сообщениями
+    aliases: [bc]
+  msg:
+    description: Личные сообщения
+    aliases: [m, tell, w]
+  reply:
+    description: Ответить на последнее сообщение
+    aliases: [r]
+  ignore:
+    description: Добавить игрока в черный список
+    aliases: [ignoreplayer]
+  settings:
+    description: Личные настройки чата
+    aliases: [gchatsettings]
+  mutechat:
+    description: Включить/выключить глобальный чат
+    aliases: [mc]
+  clearchat:
+    description: Очистить чат всем игрокам
+    aliases: [cc]
+
 permissions:
-  ghub.use:
-    description: Доступ к команде /ghub
-    default: true
-  ghub.reload:
-    description: Перезагрузка конфига gHub
+  gchat.*:
+    description: Доступ ко всем функциям gChat
     default: op
-  ghub.spawn:
-    description: Установка спавна gHub
+    children:
+      gchat.use: true
+      gchat.reload: true
+      gchat.debug: true
+      gchat.global: true
+      gchat.local: true
+      gchat.chat.reply: true
+      gchat.chat.msg: true
+      gchat.chat.ping: true
+      gchat.chat.everyone: true
+      gchat.bypass.filter: true
+      gchat.bypass.cooldown: true
+      gchat.broadcast: true
+
+  gchat.use:
+    description: Базовое использование gChat
+    default: true
+
+  gchat.reload:
+    description: Перезагрузка конфигурации
+    default: op
+
+  gchat.debug:
+    description: Получение debug информации
+    default: op
+
+  gchat.global:
+    description: Использование глобального чата
+    default: true
+
+  gchat.local:
+    description: Использование локального чата
+    default: true
+
+  gchat.settings.color:
+    description: Позволяет использовать кастомный цвет в /settings color
+    default: op
+
+  gchat.bypass.filter:
+    description: Обход фильтра мата
+    default: op
+
+  gchat.bypass.cooldown:
+    description: Обход кулдауна сообщений
+    default: op
+
+  gchat.broadcast:
+    description: Разрешает использовать /broadcast
+    default: op
+
+  gchat.chat.reply:
+    description: Право на использование /reply
+    default: true
+
+  gchat.chat.msg:
+    description: Право на использование /msg
+    default: true
+
+  gchat.chat.ping:
+    description: Право упоминать игроков через @
+    default: true
+
+  gchat.chat.everyone:
+    description: Право использовать @everyone
+    default: op
+
+  gchat.mutechat:
+    description: Право на команду /mutechat
+    default: op
+  gchat.mutechat.bypass:
+    description: Право писать в глобальный мут
+    default: op
+  gchat.clearchat:
+    description: Право на очистку чата
+    default: op
+  gchat.clearchat.bypass:
+    description: Защита от очистки чата
+    default: op
+  gchat.admin:
+    description: Право на получение уведомлений об обновлениях плагина
+    default: op
+  gchat.alerts:
+    description: Право на получение алертов фильтра
     default: op

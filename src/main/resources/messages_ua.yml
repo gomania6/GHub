@@ -1,0 +1,123 @@
+# gChat Messages (Ukrainian)
+
+prefix: "&8[&6gChat&8]"
+
+# Основні повідомлення
+no-permission: "{prefix} &cУ вас немає прав на виконання цієї команди."
+players-only: "{prefix} &cТільки гравці можуть виконати цю команду."
+config-reloaded: "{prefix} &aКонфігурацію перезавантажено."
+unknown-command: "{prefix} &cНевідома команда."
+reload-cooldown: "{prefix} &cЗачекайте {time} секунд перед повторним перезавантаженням."
+player-not-found: "{prefix} &cГравця не знайдено або він офлайн."
+
+# Обмеження чату
+message-cooldown: "{prefix} &cЗачекайте {time} секунд перед відправкою наступного повідомлення."
+mention-cooldown: "{prefix} &cЗачекайте {time} секунд перед наступним згадуванням гравця."
+message-too-long: "{prefix} &cПовідомлення занадто довге. Максимум {max} символів."
+message-blocked: "{prefix} &cВаше повідомлення заблоковано фільтром."
+illegal-link: "{prefix} &cЗаборонено надсилати посилання."
+muted-message: "{prefix} &cВас заглушено, ви не можете писати в чат."
+
+# Локальний/Глобальний чат
+local-chat-disabled: "{prefix} &cЛокальний чат вимкнено на сервері."
+local-chat-silent: "{prefix} &cНіхто не почув ваше локальне повідомлення."
+chat-mode-global: "{prefix} &aВи переключилися на &6глобальний &aчат."
+chat-mode-local: "{prefix} &aВи переключилися на &6локальний &aчат."
+
+# Модерація чату
+chat-muted-broadcast: "{prefix} &c&lУВАГА! &fЧат був тимчасово вимкнений адміністратором."
+chat-unmuted-broadcast: "{prefix} &a&lУВАГА! &fЧат знову увімкнено. Приємного спілкування!"
+chat-is-muted: "{prefix} &cНаразі чат вимкнений адміністратором. Писати не можна!"
+chat-cleared: "{prefix} &aЧат був очищений адміністратором &f%admin%&a."
+message-duplicate: "{prefix} &cБудь ласка, не надсилайте одне й те саме повідомлення повторно."
+
+# Інтерактивний чат
+click-to-open-url: "&aНатисніть, щоб відкрити посилання\n&7%url%"
+click-to-write: "&aНатисніть, щоб написати %player%"
+click-to-reply: "&aНатисніть, щоб відповісти %player%"
+
+# Використання команд
+usage-msg: "{prefix} &cВикористання: /msg <гравець> <повідомлення>"
+reply-usage: "{prefix} &cВикористання: /r <повідомлення>"
+channel-usage: "{prefix} &cВикористання: /%cmd% <повідомлення>"
+ignore-usage: "{prefix} &cВикористання: /ignore <гравець>"
+
+# Система ігнорування
+ignore-self: "{prefix} &cВи не можете ігнорувати самого себе."
+ignore-bypass: "{prefix} &cЦього гравця не можна додати до чорного списку."
+ignore-added: "{prefix} &aВи додали &e%player% &aдо чорного списку."
+ignore-removed: "{prefix} &eВи прибрали &a%player% &eз чорного списку."
+
+# Налаштування гравців
+settings-no-permission-color: "{prefix} &cУ вас немає прав на зміну кольору повідомлень."
+
+# Меню налаштувань
+settings-disabled: "{prefix} &cЦя функція вимкнена на сервері."
+settings-players-only: "{prefix} &cЦю команду можуть використовувати лише гравці."
+settings-menu-header: "&6=== Особисті налаштування чату ==="
+settings-menu-deaths: "&e/settings deaths &7- Повідомлення про смерті ({status}&7)"
+settings-menu-joinquit: "&e/settings joinquit &7- Повідомлення про входи/виходи ({status}&7)"
+settings-menu-advancements: "&e/settings advancements &7- Повідомлення про досягнення ({status}&7)"
+settings-menu-global: "&e/settings global &7- Глобальний чат ({status}&7)"
+settings-menu-sound: "&e/settings sound <xp|pling|anvil|none|default> &7- Звук згадування"
+settings-menu-color: "&e/settings color <chat|full> [код] &7- Колір повідомлень (Зараз: {color}&7)"
+settings-status-on: "&aУвімк"
+settings-status-off: "&cВимк"
+settings-color-default: "&7Стандартний"
+
+# Дії в налаштуваннях
+settings-deaths-on: "{prefix} &aВідображення смертей увімкнено."
+settings-deaths-off: "{prefix} &aВідображення смертей вимкнено."
+settings-joinquit-on: "{prefix} &aВідображення входів/виходів увімкнено."
+settings-joinquit-off: "{prefix} &aВідображення входів/виходів вимкнено."
+settings-adv-on: "{prefix} &aВідображення досягнень увімкнено."
+settings-adv-off: "{prefix} &aВідображення досягнень вимкнено."
+settings-global-on: "{prefix} &aГлобальний чат увімкнено."
+settings-global-off: "{prefix} &aГлобальний чат вимкнено."
+settings-sound-usage: "{prefix} &cВикористання: /settings sound <xp|pling|anvil|none|default>"
+settings-sound-changed: "{prefix} &aЗвук згадування змінено на: &e{sound}"
+settings-sound-invalid: "{prefix} &cНевідомий звук. Доступні: xp, pling, anvil, none, default."
+settings-color-usage: "{prefix} &cВикористання: /settings color <chat|full> [код]"
+settings-color-reset: "{prefix} &aКолір повідомлень скинуто на стандартний."
+settings-color-changed: "{prefix} &aКолір {type} змінено! Приклад: {example}"
+settings-color-type-full: "всього формату"
+settings-color-type-chat: "тільки тексту"
+settings-unknown: "{prefix} &cНевідоме налаштування. Використовуйте /settings для довідки."
+
+# Додаткові системні повідомлення
+pm-disabled: "{prefix} &cОсобисті повідомлення вимкнено на сервері."
+pm-ignored-target: "{prefix} &cЦей гравець ігнорує вас."
+pm-ignored-self: "{prefix} &cВи не можете писати гравцю, який у вас у чорному списку."
+pm-nobody-to-reply: "{prefix} &cВам немає кому відповідати."
+auth-required: "{prefix} &cБудь ласка, авторизуйтесь для використання чату."
+global-chat-disabled-self: "{prefix} &cВи вимкнули глобальний чат у налаштуваннях (/settings)."
+ip-blocked: "{prefix} &cРеклама сторонніх серверів заборонена."
+
+tag-cooldown-item: "{prefix} &cЗачекайте {time}с перед показом предмета."
+tag-cooldown-inv: "{prefix} &cЗачекайте {time}с перед показом інвентарю."
+tag-cooldown-ender: "{prefix} &cЗачекайте {time}с перед показом ендер-скрині."
+
+alert-format: "&8[&c!&8] &cОповіщення &8| &f%player% &7(%reason%): &f%message%"
+alert-reason-link: "Посилання"
+alert-reason-badword: "Заборонене слово"
+
+broadcast-usage: "{prefix} &6Використання: /broadcast <номер|next|reload|say <повідомлення>>"
+broadcast-usage-say: "{prefix} &cВикористання: /broadcast say <повідомлення>"
+broadcast-reloaded: "{prefix} &aКонфігурацію broadcast перезавантажено та завдання перезапущено!"
+broadcast-next-sent: "{prefix} &aНаступне broadcast повідомлення надіслано!"
+broadcast-invalid-index: "{prefix} &cНевірний номер. Доступно {max} повідомлень (від 1 до {max})."
+broadcast-sent-number: "{prefix} &aBroadcast повідомлення #{index} надіслано!"
+broadcast-invalid-argument: "{prefix} &cНевірний аргумент. Використовуйте: номер, next, reload або say <повідомлення>."
+
+item-none: "&c(Немає предмета)"
+item-enchanted: "&7(Зачаровано)"
+
+# Допомога
+help:
+  - "&6=== gChat Допомога ==="
+  - "&e/gchat reload &7- Перезавантажити плагін"
+  - "&e/gchat help &7- Показати цю сторінку"
+  - "&e/msg <гравець> <текст> &7- Особисте повідомлення"
+  - "&e/r <текст> &7- Швидка відповідь"
+  - "&e/g &7- Глобальний чат"
+  - "&e/l &7- Локальний чат"
